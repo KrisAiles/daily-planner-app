@@ -1,0 +1,240 @@
+@use './variables.scss';
+
+@mixin mobile {
+    @media only screen and (max-width: 687px) {
+        @content;
+    }
+}
+
+@mixin tablet {
+    @media only screen and (max-width: 800px) {
+        @content;
+    }
+}
+
+@mixin desktop {
+    @media only screen and (max-width: 1200px) {
+        @content;
+    }
+}
+
+@mixin large-desktop {
+    @media only screen and (min-width: 1201px) {
+        @content;
+    }
+}
+
+@mixin from-to {
+    opacity: 0;
+}
+
+@mixin enter-leave {
+    transition: all 1s ease;
+}
+
+@mixin from-to-left {
+    @include from-to;
+    transform: translateX(-300px);
+}
+
+@mixin from-to-right {
+    @include from-to;
+    transform: translateX(300px);
+}
+
+@mixin from-to-bottom {
+    @include from-to;
+    transform: translateY(300px);
+}
+
+@mixin from-to-fade {
+    @include from-to;
+}
+
+@mixin flex-center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+@mixin subhead-display-container {
+    flex: 0 1 auto;
+    width: 20.5rem;
+    height: 20.5rem;
+    padding: 1.4375rem; 
+}
+
+@mixin button-style {
+    border: none;
+    border-radius: 0.3125rem;
+    box-shadow: 0.0625rem 0.0625rem 0.125rem variables.$black-color;
+    background-color: variables.$aqua-color;
+    color: variables.$white-color;
+    width: 3.125rem;
+    height: 1.25rem;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    cursor: pointer;
+
+    &:active {
+        box-shadow: inset 0.0625rem 0.0625rem 0.125rem black;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        box-shadow: none;
+    }
+}
+
+@mixin button-style-small {
+    border: none;
+    border-radius: 0.3125rem;
+    box-shadow: 0.0625rem 0.0625rem 0.125rem variables.$black-color;
+    background-color: variables.$aqua-color;
+    color: variables.$white-color;
+    width: 1.25rem;
+    height: 1.25rem;
+    font-family: "Quicksand", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    margin: 0 0.25rem;
+    cursor: pointer;
+
+    &:active {
+        box-shadow: inset 0.0625rem 0.0625rem 0.125rem variables.$black-color;
+    }
+
+    &:disabled {
+        opacity: 0.5;
+        box-shadow: none;
+    }
+}
+
+@mixin input-style {
+    border: none;
+    padding: 0.25rem;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: variables.$pink-color;
+    color: variables.$white-color;
+
+    &:focus {
+        outline: solid variables.$aqua-color;
+    }
+}
+
+@mixin forecast-input-style {
+    border: none;
+    padding: 0.25rem;
+    font-family: "Quicksand", sans-serif;
+    font-size: 0.75rem;
+    font-weight: 600;
+    background-color: variables.$olive-color;
+    color: variables.$white-color;
+
+    &:focus {
+        outline: solid variables.$aqua-color;
+    }
+}
+
+@mixin display-container {
+    width: 100%;
+    height: 100%;
+    text-align: center;
+
+    h2 {
+        font-size: 2rem;
+        font-weight: 600;
+        padding-bottom: 1rem;
+        color: variables.$olive-color;
+    }
+
+    h3 {
+        font-size: 2rem;
+        font-weight: 600;
+        padding-bottom: 1rem;
+        color: variables.$olive-color;
+        text-align: left;
+        text-decoration: underline;
+    }
+}
+
+@mixin item-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 100%;
+    min-height: 4.75rem;
+    box-shadow: variables.$box-shadow;
+    margin: 0.5rem 0;
+    padding: 0.5rem;
+    background-color: variables.$olive-color;
+    color: variables.$white-color;
+    font-size: 1.25rem;
+}
+
+@mixin item-description {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    justify-content: flex-start;
+    width: 100%;
+    min-height: 3.75rem;
+    padding: 0.3125rem;
+    color: variables.$white-color;
+    font-size: 1.25rem;
+}
+
+@mixin edit-delete-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.25rem;
+}
+
+@mixin edit-delete {
+    width: 16px;
+    text-align: center;
+    cursor: pointer;
+
+    img {
+        height: 1rem;
+        width: 1rem;
+    }
+}
+
+@mixin add-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    text-align: center;
+    padding: 0.5rem;
+    width: 100%;
+    min-height: 100%;
+    background-color: variables.$blue-color;
+    color: variables.$white-color;
+}
+
+@mixin time-container {    
+    font-size: 1.125rem;
+    color: variables.$white-color;      
+    padding: 0.25rem;
+}
+
+@mixin add-display {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    position: relative;
+    padding: 0.5rem;
+    width: 100%;    
+    margin: 0.5rem 0;
+    color: variables.$white-color;
+    font-size: 1.25rem;
+}
