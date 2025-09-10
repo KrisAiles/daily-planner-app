@@ -202,7 +202,7 @@ export const useUserStore = defineStore('user', () => {
         errorMessage.value = '';
         verifyPassword.value = '';
         try {
-            const response = await fetch(`${urlStore.url}/user/logout`, {
+            /*const response = await fetch(`${urlStore.url}/user/logout`, {
                 method: "POST",
                 credentials: "include",
             });
@@ -219,8 +219,8 @@ export const useUserStore = defineStore('user', () => {
                 localStorage.removeItem('isAuthenticated');
                 loggedIn.value = localStorage.getItem('isAuthenticated');
                 router.push({ path: '/login' });
-            }
-            
+            }*/
+            console.log('called log out function');
             return;
             
         } catch (error) {
