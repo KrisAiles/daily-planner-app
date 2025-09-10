@@ -82,7 +82,7 @@ export const useUserStore = defineStore('user', () => {
             return errorMessage.value = 'Please enter a valid email address';
         }
         if (!checkPassword(inputPassword.value)) {
-            return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         try {
             const email = inputEmail.value;
@@ -147,7 +147,7 @@ export const useUserStore = defineStore('user', () => {
         }
         const validatedEmail = createEmail.value;
         if (!checkPassword(createPassword.value)) {
-        return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+        return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedPassword = createPassword.value;
         try {
@@ -397,7 +397,7 @@ export const useUserStore = defineStore('user', () => {
         }        
         const validatedFirstName = firstCharCap(editFirstNameInput.value);
         if (!checkPassword(verifyPassword.value)) {
-            return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedPassword = verifyPassword.value;
         try {
@@ -441,7 +441,7 @@ export const useUserStore = defineStore('user', () => {
         }
         const validatedLastName = firstCharCap(editLastNameInput.value);
         if (!checkPassword(verifyPassword.value)) {
-            return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedPassword = verifyPassword.value;
         try {
@@ -485,7 +485,7 @@ export const useUserStore = defineStore('user', () => {
         }
         const validatedEmail = editEmailInput.value;
         if (!checkPassword(verifyPassword.value)) {
-            return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedPassword = verifyPassword.value;
         try {
@@ -525,11 +525,11 @@ export const useUserStore = defineStore('user', () => {
     const submitPassword = async (key: string) => {
         errorMessage.value = '';
         if (!checkPassword(verifyPassword.value)) {
-            return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedPassword = verifyPassword.value;
         if (!checkPassword(editPasswordInput.value)) {
-            return errorMessage.value = 'Please enter a new password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a new password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedNewPassword = editPasswordInput.value;
         try {
@@ -703,7 +703,7 @@ export const useUserStore = defineStore('user', () => {
         errorMessage.value = '';
         successMessage.value = '';
         if (!checkPassword(inputPassword.value)) {
-            return errorMessage.value = 'Please enter a password between 8 and 15 characters, with at least one uppercase letter, lowercase letter, number and special character.';
+            return errorMessage.value = 'Please enter a password between 8 and 30 characters, with at least one uppercase letter, lowercase letter, number and special character.';
         }
         const validatedNewPassword = inputPassword.value;
         try {
@@ -764,7 +764,7 @@ export const useUserStore = defineStore('user', () => {
     }
 
     const checkPassword = (password: string) => {
-        const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,15}$/;
+        const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@.#$!%*?&])[A-Za-z\d@.#$!%*?&]{8,30}$/;
         if (password.length < 8 || password.length > 15 || !regexPassword.test(password)) {
             return false;
         }
