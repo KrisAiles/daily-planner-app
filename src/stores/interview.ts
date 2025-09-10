@@ -4,9 +4,11 @@ import type { Interviews } from '../assets/types/types';
 import { useUserStore } from './user';
 import { testUuid } from '../composables/testUuid';
 import { testInput } from '../composables/testInput';
+import { useUrlStore } from './url';
 
 export const useInterviewStore = defineStore('interview', () => {
     const userStore = useUserStore();
+    const urlStore = useUrlStore();
     const interviewItems = ref<Interviews []>([]);
     const mondayInterviewItems = ref<Interviews []>([]);
     const tuesdayInterviewItems = ref<Interviews []>([]);
@@ -71,7 +73,7 @@ export const useInterviewStore = defineStore('interview', () => {
 
     const getAllInterviews = async () => {
         try {
-            const response = await fetch("http://localhost:3000/interview", {
+            const response = await fetch(`${urlStore.url}/interview`, {
                 method: "GET",
                 credentials: "include"
             });
@@ -170,7 +172,7 @@ export const useInterviewStore = defineStore('interview', () => {
             return;
         }
         try {
-            const deleteInterview = await fetch(`http://localhost:3000/interview/${interview_id}`, {
+            const deleteInterview = await fetch(`${urlStore.url}/interview/${interview_id}`, {
                 method: "DELETE",
                 credentials: "include"
             });
@@ -264,7 +266,7 @@ export const useInterviewStore = defineStore('interview', () => {
             const stage = inputStage.value;
             const interview_time = `${inputDate.value} ${inputTime.value}`;
             const body = { company, job, candidate, stage, interview_time };
-            const response = await fetch("http://localhost:3000/interview", {
+            const response = await fetch(`${urlStore.url}/interview`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -365,7 +367,7 @@ export const useInterviewStore = defineStore('interview', () => {
             const stage = inputStage.value;
             const interview_time = `${inputDate.value} ${inputTime.value}`;
             const body = { company, job, candidate, stage, interview_time };
-            const response = await fetch(`http://localhost:3000/interview/${interview_id}`, {
+            const response = await fetch(`${urlStore.url}/interview/${interview_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },

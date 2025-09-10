@@ -3,9 +3,11 @@ import { defineStore } from 'pinia';
 import { useUserStore } from '../stores/user';
 import { testUuid } from '../composables/testUuid';
 import { testInput } from '../composables/testInput';
+import { useUrlStore } from './url';
 
 export const useNoteStore = defineStore('note', () => {
     const userStore = useUserStore();
+    const urlStore = useUrlStore();
     const noteItems = ref<{note_id: string, note_description: string, note_completed: boolean, note_progress: boolean}[]>([]);
     const addOpen = ref(false);
     const addInput = ref('');
@@ -17,7 +19,7 @@ export const useNoteStore = defineStore('note', () => {
 
     const getNotes = async () => {
         try {
-            const response = await fetch("http://localhost:3000/note", {
+            const response = await fetch(`${urlStore.url}/note`, {
                 method: "GET",
                 credentials: "include"
             });
@@ -52,7 +54,7 @@ export const useNoteStore = defineStore('note', () => {
         try {
             const note_description = addInput.value;
             const body = { note_description };
-            const response = await fetch("http://localhost:3000/note", {
+            const response = await fetch(`${urlStore.url}/note`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -127,7 +129,7 @@ export const useNoteStore = defineStore('note', () => {
         try {
             const note_description = editDescription.value;
             const body = { note_description };
-            const response = await fetch(`http://localhost:3000/note/${note_id}`, {
+            const response = await fetch(`${urlStore.url}/note/${note_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -168,7 +170,7 @@ export const useNoteStore = defineStore('note', () => {
             return;
         }
         try {
-            const deleteTodo = await fetch(`http://localhost:3000/note/${note_id}`, {
+            const deleteTodo = await fetch(`${urlStore.url}/note/${note_id}`, {
                 method: "DELETE",
                 credentials: "include"
             });
@@ -208,7 +210,7 @@ export const useNoteStore = defineStore('note', () => {
             const note_completed = noteItems.value[index].note_completed;
             const note_progress = noteItems.value[index].note_progress;
             const body = { note_completed, note_progress };
-            const response = await fetch(`http://localhost:3000/note/completed/${note_id}`, {
+            const response = await fetch(`${urlStore.url}/note/completed/${note_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -244,7 +246,7 @@ export const useNoteStore = defineStore('note', () => {
         try {
             const note_progress = noteItems.value[index].note_progress;
             const body = { note_progress };
-            const response = await fetch(`http://localhost:3000/note/progress/${note_id}`, {
+            const response = await fetch(`${urlStore.url}/note/progress/${note_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },

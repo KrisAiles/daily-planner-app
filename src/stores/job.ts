@@ -4,9 +4,11 @@ import type { Jobs } from '../assets/types/types';
 import { useUserStore } from './user';
 import { testUuid } from '../composables/testUuid';
 import { testInput } from '../composables/testInput';
+import { useUrlStore } from './url';
 
 export const useJobsStore = defineStore('jobs', () => {
-    const userStore = useUserStore();;
+    const userStore = useUserStore();
+    const urlStore = useUrlStore();
     const jobItems = ref<Jobs []>([]);
     const addOpen = ref(false);
     const editOpen = ref<number | undefined>();
@@ -18,7 +20,7 @@ export const useJobsStore = defineStore('jobs', () => {
 
     const getAllJobs = async () => {
         try {
-            const response = await fetch("http://localhost:3000/job", {
+            const response = await fetch(`${urlStore.url}/job`, {
                 method: "GET",
                 credentials: "include"
             });
@@ -51,7 +53,7 @@ export const useJobsStore = defineStore('jobs', () => {
             return;
         }
         try {
-            const deleteJob = await fetch(`http://localhost:3000/job/${job_id}`, {
+            const deleteJob = await fetch(`${urlStore.url}/job/${job_id}`, {
                 method: "DELETE",
                 credentials: "include"
             });
@@ -118,7 +120,7 @@ export const useJobsStore = defineStore('jobs', () => {
             const company = inputCompany.value;
             const job = inputJob.value;
             const body = { company, job };
-            const response = await fetch("http://localhost:3000/job", {
+            const response = await fetch(`${urlStore.url}/job`, {
                 method: "POST",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -173,7 +175,7 @@ export const useJobsStore = defineStore('jobs', () => {
             const company = inputCompany.value;
             const job = inputJob.value;
             const body = { company, job };
-            const response = await fetch(`http://localhost:3000/job/${job_id}`, {
+            const response = await fetch(`${urlStore.url}/job/${job_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -216,7 +218,7 @@ export const useJobsStore = defineStore('jobs', () => {
         try {
             const cv = jobItems.value[index].cv;
             const body = { cv };
-            const response = await fetch(`http://localhost:3000/job/cv/${job_id}`, {
+            const response = await fetch(`${urlStore.url}/job/cv/${job_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
@@ -251,7 +253,7 @@ export const useJobsStore = defineStore('jobs', () => {
         try {
             const interview = jobItems.value[index].interview;
             const body = { interview };
-            const response = await fetch(`http://localhost:3000/job/interview/${job_id}`, {
+            const response = await fetch(`${urlStore.url}/job/interview/${job_id}`, {
                 method: "PUT",
                 credentials: "include",
                 headers: { "Content-Type": "application/json" },
