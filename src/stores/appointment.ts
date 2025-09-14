@@ -118,9 +118,7 @@ export const useAppointmentStore = defineStore('appointment', () => {
             await getAllAppointments();
         }
         for (let i = 0; i < appointmentItems.value.length; i++) {
-            console.log(Date.parse(appointmentItems.value[i].start_time));
-            console.log(currentTime);
-            if (Date.parse(appointmentItems.value[i].start_time) <= currentTime && Date.parse(appointmentItems.value[i].end_time) >= currentTime) {
+            if (new Date(appointmentItems.value[i].start_time).getTime() <= currentTime && new Date(appointmentItems.value[i].end_time).getTime() >= currentTime) {
                 if (!currentAppointmentIndex.value.includes(i)) {
                     currentAppointmentIndex.value.push(i);
                 }
@@ -243,7 +241,7 @@ export const useAppointmentStore = defineStore('appointment', () => {
         try {
             const appointment_description = inputDescription.value;
             const start_time = `${currentDate.value} ${inputStartTime.value}`;
-            const end_time = `${currentDate.value} ${inputEndTime.value}`;
+            const end_time = new Date(`${currentDate.value} ${inputEndTime.value}`).getTime();
             const body = { appointment_description, start_time, end_time };
             const response = await fetch(`${urlStore.url}/appointment`, {
                 method: "POST",
