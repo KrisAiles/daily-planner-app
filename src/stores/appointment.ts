@@ -220,6 +220,7 @@ export const useAppointmentStore = defineStore('appointment', () => {
     };
 
     const addAppointment = async () => {
+        console.log(new Date(`${currentDate.value} ${inputEndTime.value}`).toString());
         if (inputDescription.value === '') {
             return alert('Description can not be empty.');
         }
@@ -241,7 +242,7 @@ export const useAppointmentStore = defineStore('appointment', () => {
         try {
             const appointment_description = inputDescription.value;
             const start_time = `${currentDate.value} ${inputStartTime.value}`;
-            const end_time = new Date(`${currentDate.value} ${inputEndTime.value}`).getTime();
+            const end_time = new Date(`${currentDate.value} ${inputEndTime.value}`).toString();
             const body = { appointment_description, start_time, end_time };
             const response = await fetch(`${urlStore.url}/appointment`, {
                 method: "POST",
