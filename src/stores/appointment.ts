@@ -118,7 +118,7 @@ export const useAppointmentStore = defineStore('appointment', () => {
             await getAllAppointments();
         }
         for (let i = 0; i < appointmentItems.value.length; i++) {
-            if (new Date(appointmentItems.value[i].start_time).getTime() <= currentTime && new Date(appointmentItems.value[i].end_time).getTime() >= currentTime) {
+            if (Date.parse(appointmentItems.value[i].start_time) <= currentTime && Date.parse(appointmentItems.value[i].end_time) >= currentTime) {
                 if (!currentAppointmentIndex.value.includes(i)) {
                     currentAppointmentIndex.value.push(i);
                 }
