@@ -5,11 +5,11 @@ const store = useAppointmentStore();
 
 store.setCurrentDate();
 
-if (store.appointmentItems.length === 0) {
+/*if (store.appointmentItems.length === 0) {
     store.getAllAppointments();
 }
 
-setInterval(store.checkAppointmentStatus, 60000);
+setInterval(store.checkAppointmentStatus, 60000);*/
 
 </script>
 
