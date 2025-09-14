@@ -27,7 +27,7 @@ setInterval(store.checkAppointmentStatus, 60000);
                     </div>
                 </div>
                 <div class="appointment" :style="{color: store.pastAppointmentIndex.includes(index) ? 'lightgray' : 'white', textDecorationLine: store.pastAppointmentIndex.includes(index) ? 'line-through' : 'none', fontSize: store.currentAppointmentIndex.includes(index) ? '1.5rem' : '1.25rem'}">
-                    {{ item.appointment_description }}
+                    {{ item.appointment_description }} {{ item.start_time }} {{ item.end_time }}
                 </div>
                 <div class="edit-delete">
                     <div class="appointment-edit">
