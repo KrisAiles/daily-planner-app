@@ -254,7 +254,7 @@ export const useAppointmentStore = defineStore('appointment', () => {
 
             if (jsonData.authErrorMessage) {
                 console.log(jsonData.authErrorMessage);
-                userStore.onLogout();
+                //userStore.onLogout();
                 return console.log('not logged in');
             }
 
