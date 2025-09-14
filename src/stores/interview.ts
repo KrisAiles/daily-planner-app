@@ -264,7 +264,7 @@ export const useInterviewStore = defineStore('interview', () => {
             const job = inputJob.value;
             const candidate = inputCandidate.value;
             const stage = inputStage.value;
-            const interview_time = `${inputDate.value} ${inputTime.value}`;
+            const interview_time = new Date(`${inputDate.value} ${inputTime.value}`).toUTCString();
             const body = { company, job, candidate, stage, interview_time };
             const response = await fetch(`${urlStore.url}/interview`, {
                 method: "POST",
@@ -365,7 +365,7 @@ export const useInterviewStore = defineStore('interview', () => {
             const job = inputJob.value;
             const candidate = inputCandidate.value;
             const stage = inputStage.value;
-            const interview_time = `${inputDate.value} ${inputTime.value}`;
+            const interview_time = new Date(`${inputDate.value} ${inputTime.value}`).toUTCString();
             const body = { company, job, candidate, stage, interview_time };
             const response = await fetch(`${urlStore.url}/interview/${interview_id}`, {
                 method: "PUT",
@@ -387,11 +387,11 @@ export const useInterviewStore = defineStore('interview', () => {
 
             for (let i = 0; i < interviewItems.value.length; i++) {
                 if (interviewItems.value[i].interview_id === interview_id) {
-                    interviewItems.value[i].company = inputCompany.value;
-                    interviewItems.value[i].job = inputJob.value;
-                    interviewItems.value[i].candidate = inputCandidate.value;
-                    interviewItems.value[i].stage = inputStage.value;
-                    interviewItems.value[i].interview_time = `${inputDate.value} ${inputTime.value}`;
+                    interviewItems.value[i].company = jsonData.company;
+                    interviewItems.value[i].job = jsonData.job;
+                    interviewItems.value[i].candidate = jsonData.candidate;
+                    interviewItems.value[i].stage = jsonData.stage;
+                    interviewItems.value[i].interview_time = jsonData.interview_time;
                 }
             }
 
