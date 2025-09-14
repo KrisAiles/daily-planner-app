@@ -366,8 +366,8 @@ export const useAppointmentStore = defineStore('appointment', () => {
     };
 
     function setTime(time: string) {
-        const adjustTime = time.split("Z");
-        const hour = new Date(adjustTime[0]).getHours();
+        //const adjustTime = time.split("Z");
+        const hour = new Date(time).getUTCHours();
         let fullHour: string;
         if (hour < 10) {
             fullHour = `0${hour}`;
