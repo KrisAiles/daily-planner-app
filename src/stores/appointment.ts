@@ -307,8 +307,8 @@ export const useAppointmentStore = defineStore('appointment', () => {
         }
         try {            
             const appointment_description = inputDescription.value;
-            const start_time = `${currentDate.value} ${inputStartTime.value}`;
-            const end_time = `${currentDate.value} ${inputEndTime.value}`;
+            const start_time = new Date(`${currentDate.value} ${inputStartTime.value}`).toUTCString();
+            const end_time = new Date(`${currentDate.value} ${inputEndTime.value}`).toUTCString();
             const body = { appointment_description, start_time, end_time };
             const response = await fetch(`${urlStore.url}/appointment/${appointment_id}`, {
                 method: "PUT",
@@ -328,9 +328,9 @@ export const useAppointmentStore = defineStore('appointment', () => {
                 return console.log(jsonData.errorMessage);
             }
 
-            appointmentItems.value[index].appointment_description = inputDescription.value;
-            appointmentItems.value[index].start_time = `${currentDate.value} ${inputStartTime.value}`;
-            appointmentItems.value[index].end_time = `${currentDate.value} ${inputEndTime.value}`;
+            appointmentItems.value[index].appointment_description = jsonData.appointment_description;
+            appointmentItems.value[index].start_time = jsonData.start_time;
+            appointmentItems.value[index].end_time = jsonData.end_time;
 
             appointmentItems.value = appointmentItems.value.sort((a, b) => (new Date(a.start_time).getTime() > new Date(b.start_time).getTime() ? 1 : new Date(b.start_time).getTime() > new Date(a.start_time).getTime() ? -1 : 0));
             checkAppointmentStatus();
